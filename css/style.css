@@ -1,0 +1,153 @@
+.bar-window {
+  background-color: #1e1e2e;
+  color: #cdd6f4;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+.clock-widget {
+  color: #89b4fa;
+  font-weight: bold;
+}
+
+.date-widget {
+  color: #cdd6f4;
+  font-size: 15px;
+}
+
+.left-widgets {
+  padding-left: 6px;
+}
+
+.workspaces-widget {
+  padding: 2px 0;
+}
+
+.workspace-button {
+  background-color: #313244;
+  color: #cdd6f4;
+  padding: 2px 8px;
+  margin: 0 2px;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.workspace-button:hover {
+  background-color: #cba6f7;
+  color: #1e1e2e;
+}
+
+.workspace-button.active {
+  background-color: #89b4fa;
+  color: #1e1e2e;
+  font-weight: bold;
+}
+
+.active-window-widget {
+  color: #cdd6f4;
+  font-size: 14px;
+  padding-left: 6px;
+  font-style: italic;
+}
+
+.right-widgets {
+  padding-right: 6px;
+}
+
+.control-center-button {
+  background-color: transparent;
+  color: #cdd6f4;
+  padding: 4px;
+  margin: 0 1px;
+  border-radius: 6px;
+  font-size: 18px;
+}
+.control-center-button > icon {
+  font-size: inherit;
+}
+.control-center-button:hover {
+  background-color: #313244;
+}
+
+.volume-popup-window {
+  background-color: #313244;
+  color: #cdd6f4;
+  border-radius: 6px;
+  border: 1px solid #45475a;
+}
+
+.volume-popup-content {
+  padding: 12px;
+  min-height: 40px;
+}
+.volume-popup-content .popup-mute-button {
+  background-color: transparent;
+  color: #cdd6f4;
+  border: none;
+  padding: 5px;
+  border-radius: 6px;
+}
+.volume-popup-content .popup-mute-button:hover {
+  background-color: #45475a;
+}
+.volume-popup-content .popup-mute-button icon {
+  font-size: 20px;
+}
+.volume-popup-content .volume-slider {
+  min-height: 20px;
+  min-width: 150px;
+}
+
+.battery-percentage-label {
+  font-size: 13px;
+  color: #cdd6f4;
+  margin-left: 2px;
+}
+
+.ram-usage-indicator {
+  color: #cdd6f4;
+  font-size: 14px;
+  padding: 0 4px;
+}
+.ram-usage-indicator icon {
+  font-size: 16px;
+}
+.ram-usage-indicator label {
+  margin-left: 4px;
+}
+
+.cpu-usage-indicator {
+  color: #cdd6f4;
+  font-size: 14px;
+  padding: 0 4px;
+}
+.cpu-usage-indicator icon {
+  font-size: 16px;
+}
+.cpu-usage-indicator label {
+  margin-left: 4px;
+}
+
+.cpu-temp-indicator {
+  color: #cdd6f4;
+  font-size: 14px;
+  padding: 0 4px;
+}
+.cpu-temp-indicator icon {
+  font-size: 16px;
+}
+.cpu-temp-indicator label {
+  margin-left: 4px;
+}
+
+.gpu-temp-indicator {
+  color: #cdd6f4;
+  font-size: 14px;
+  padding: 0 4px;
+}
+.gpu-temp-indicator icon {
+  font-size: 16px;
+}
+.gpu-temp-indicator label {
+  margin-left: 4px;
+}/*# sourceMappingURL=style.css.map */

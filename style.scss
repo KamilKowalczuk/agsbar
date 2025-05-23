@@ -1,0 +1,44 @@
+.bar-window {
+	background-color: #1e1e2e; /* Catppuccin Mocha Base */
+	color: #cdd6f4; /* Catppuccin Mocha Text */
+	padding: 5px 10px; /* Dodajemy trochę więcej paddingu dla czytelności */
+	font-size: 16px; /* Ustawienie rozmiaru czcionki */
+}
+
+.clock-widget {
+	color: #89b4fa; /* Catppuccin Mocha Blue */
+	font-weight: bold;
+}
+// ... (twoje wcześniejsze style dla .bar-window, .clock-widget) ...
+
+.left-widgets {
+	// Możesz dodać tu jakieś specyficzne style dla całego lewego kontenera, jeśli potrzebne
+	padding-left: 6px; // Mały odstęp od lewej krawędzi paska
+}
+
+.workspaces-widget {
+	// Style dla kontenera przycisków pulpitów
+	padding: 2px 0;
+}
+
+.workspace-button {
+	background-color: $surface0; // Używamy koloru powierzchni z palety Catppuccin
+	color: $foreground;
+	padding: 2px 8px;
+	margin: 0 2px; // Mały margines między przyciskami
+	border-radius: 6px; // Zaokrąglenie jak "pastylka"
+	font-size: 14px;
+	transition: background-color 0.3s ease, color 0.3s ease; // Płynne przejście
+
+	&:hover {
+		// Styl przy najechaniu myszką
+		background-color: $mauve; // Akcentowy kolor Catppuccin Mauve
+		color: $background;
+	}
+}
+
+.workspace-button.active {
+	background-color: $blue; // Aktywny pulpit wyróżniony kolorem Catppuccin Blue
+	color: $background; // Ciemny tekst na jasnym tle dla lepszego kontrastu
+	font-weight: bold;
+}

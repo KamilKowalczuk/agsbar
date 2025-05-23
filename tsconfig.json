@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"forceConsistentCasingInFileNames": true,
+		"jsx": "react-jsx",
+		"jsxImportSource": "astal/gtk3",
+		"module": "ES2022",
+		"moduleResolution": "Bundler",
+		"skipLibCheck": true,
+		"strict": true,
+		"target": "ES2022",
+
+		"typeRoots": ["./@girs", "./node_modules/@girs", "./node_modules/@types"]
+	},
+	"exclude": ["node_modules"],
+	"include": ["**/*.ts", "**/*.tsx", "@girs/**/*.d.ts"]
+	//"jsxFactory": "Widget.createElement",
+	//"jsxFragmentFactory": "Widget.Fragment",
+	//"jsxImportSource": "astal/gtk3"
+}

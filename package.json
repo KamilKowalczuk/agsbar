@@ -1,0 +1,12 @@
+{
+    "dependencies": {
+        "astal": "/usr/share/astal/gjs"
+    },
+    "devDependencies": {
+        "@girs/glib-2.0": "latest",
+        "@girs/gtk-3.0": "latest",
+        "@types/react": "^19.1.5",
+        "typescript": "latest"
+    },
+    "name": "astal-shell"
+}

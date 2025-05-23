@@ -1,0 +1,212 @@
+@use './variables';
+// Preferowane dla Dart SASS// Reset (jeśli go używasz)
+// * {
+// 	all: unset;
+// }
+
+// Reguły stylów teraz muszą odwoływać się do zmiennych przez nazwę modułu
+.bar-window {
+	background-color: variables.$background; // Użycie zmiennej przez nazwę modułu
+	color: variables.$foreground;
+	padding: 5px 10px;
+	font-size: 16px;
+}
+
+.clock-widget {
+	color: variables.$blue;
+	font-weight: bold;
+}
+
+.date-widget {
+	color: variables.$foreground; // Możesz użyć nieco innego odcienia, jeśli chcesz odróżnić od zegara
+	font-size: 15px; // Dostosuj rozmiar, np. taki sam jak zegar lub nieco mniejszy
+	// margin-right: 5px; // Zamiast tego użyliśmy 'spacing' w kontenerze <box>
+}
+
+//.center-widget-container {
+	// Jeśli potrzebujesz dodatkowych stylów dla kontenera daty i zegara
+	// Np. aby elementy były idealnie wyśrodkowane w pionie, jeśli mają różne wysokości
+	//align-items: center; // Wyrównanie elementów wewnątrz boxa do środka w pionie (CSS flexbox property)
+	// W GTK CSS to może być `GtkBox { align-items: center; }` lub podobne,
+	// ale dla `Astal.Box` właściwość `valign` na dzieciach lub `homogeneous` na boxie
+	// może być bardziej odpowiednie.
+	// Na razie `halign={Gtk.Align.CENTER}` na samym boxie powinno wystarczyć dla ułożenia horyzontalnego.
+	// Wertykalne wyrównanie dzieci w Gtk.Box kontroluje się inaczej niż w web flexbox.
+	// Najprościej, jeśli DateWidget i ClockWidget mają ten sam rozmiar czcionki i padding.
+//}
+
+.left-widgets {
+	padding-left: 6px;
+}
+
+.workspaces-widget {
+	padding: 2px 0;
+}
+
+.workspace-button {
+	background-color: variables.$surface0;
+	color: variables.$foreground;
+	padding: 2px 8px;
+	margin: 0 2px;
+	border-radius: variables.$border-radius-standard; // Użycie nowej zmiennej
+	font-size: 14px;
+	transition: background-color 0.3s ease, color 0.3s ease;
+
+	&:hover {
+		background-color: variables.$mauve;
+		color: variables.$background;
+	}
+}
+
+.workspace-button.active {
+	background-color: variables.$blue;
+	color: variables.$background;
+	font-weight: bold;
+}
+
+.active-window-widget {
+	color: variables.$foreground;
+	font-size: 14px;
+	padding-left: 6px;
+	font-style: italic;
+}
+
+.right-widgets {
+	padding-right: 6px;
+}
+
+.control-center-button {
+	background-color: transparent;
+	color: variables.$foreground;
+	padding: 4px;
+	margin: 0 1px;
+	border-radius: variables.$border-radius-standard;
+	font-size: 18px;
+
+	> icon {
+		font-size: inherit;
+	}
+
+	&:hover {
+		background-color: variables.$surface0;
+	}
+}
+
+// Style dla tooltipa (jeśli zdecydujemy się je dodać z powrotem)
+// Pamiętaj, że stylowanie systemowych tooltipów GTK z poziomu CSS aplikacji bywa trudne.
+// window#gtk-tooltip {
+//   background-color: variables.$surface0;
+//   color: variables.$foreground;
+//   border: 1px solid variables.$surface1;
+//   border-radius: variables.$border-radius-standard;
+//   padding: 8px 12px;
+//   font-size: 13px;
+//   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+
+//   label {
+//     color: variables.$foreground;
+//   }
+// }
+
+// Style dla pop-upa głośności
+.volume-popup-window {
+	background-color: variables.$surface0;
+	color: variables.$foreground;
+	border-radius: variables.$border-radius-standard;
+	border: 1px solid variables.$surface1;
+}
+
+.volume-popup-content {
+	padding: 12px;
+	min-height: 40px;
+
+	.popup-mute-button {
+		background-color: transparent;
+		color: variables.$foreground;
+		border: none;
+		padding: 5px;
+		border-radius: 6px; // Można użyć $border-radius-standard
+		&:hover {
+			background-color: variables.$surface1;
+		}
+		icon {
+			font-size: 20px;
+		}
+	}
+
+	.volume-slider {
+		min-height: 20px;
+		min-width: 150px;
+		// Style dla suwaka (trough, progress, slider) mogą wymagać specyficznych selektorów GTK
+		// trough { background-color: variables.$surface1; border-radius: 5px; }
+		// trough progress { background-color: variables.$blue; border-radius: 5px; }
+	}
+}
+
+// Style dla procentów baterii (jeśli zdecydujemy się je dodać)
+.battery-percentage-label {
+	font-size: 13px;
+	color: variables.$foreground;
+	margin-left: 2px;
+	//   &:empty {
+	//     display: none;
+	//   }
+}
+
+.ram-usage-indicator {
+	color: variables.$foreground;
+	font-size: 14px; // Dopasuj do reszty paska
+	padding: 0 4px; // Mały padding, jeśli jest w grupie
+
+	icon {
+		font-size: 16px; // Rozmiar ikony
+		// color: $blue; // Możesz nadać ikonie inny kolor akcentu
+	}
+
+	label {
+		margin-left: 4px;
+	}
+}
+
+.cpu-usage-indicator {
+	color: variables.$foreground;
+	font-size: 14px;
+	padding: 0 4px;
+
+	icon {
+		font-size: 16px;
+		// color: $mauve; // Możesz nadać ikonie inny kolor akcentu
+	}
+
+	label {
+		margin-left: 4px;
+	}
+}
+.cpu-temp-indicator {
+	color: variables.$foreground;
+	font-size: 14px;
+	padding: 0 4px;
+
+	icon {
+		font-size: 16px;
+		// color: $red; // Możesz nadać specjalny kolor, np. gdy temp jest wysoka
+	}
+
+	label {
+		margin-left: 4px;
+	}
+}
+.gpu-temp-indicator {
+	color: variables.$foreground;
+	font-size: 14px;
+	padding: 0 4px;
+
+	icon {
+		font-size: 16px;
+		// color: $orange; // Możesz użyć innej zmiennej koloru dla GPU
+	}
+
+	label {
+		margin-left: 4px;
+	}
+}
