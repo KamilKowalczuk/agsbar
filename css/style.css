@@ -150,4 +150,137 @@
 }
 .gpu-temp-indicator label {
   margin-left: 4px;
+}
+
+.grouped-indicators-button {
+  background-color: transparent;
+  padding: 2px 5px;
+  margin: 0 2px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+.grouped-indicators-button:hover {
+  background-color: #45475a;
+}
+.grouped-indicators-button .grouped-indicators-box > button {
+  background-color: transparent;
+  padding: 0 2px;
+  margin: 0;
+}
+.grouped-indicators-button .grouped-indicators-box > button:hover {
+  background-color: transparent;
+}
+.grouped-indicators-button .grouped-indicators-box > button > icon {
+  font-size: 16px;
+}
+.grouped-indicators-button .grouped-indicators-box > button .battery-percentage-label {
+  font-size: 11px;
+  margin-left: 1px;
+}
+
+.control-center-popup-window {
+  background-color: #313244;
+  color: #cdd6f4;
+  border-radius: 10px;
+  border: 1px solid #45475a;
+  padding: 0;
+  min-width: 300px;
+  min-height: 400px;
+}
+
+.control-center-content {
+  background-color: transparent;
+  color: #cdd6f4;
+}
+
+.cc-quick-toggles button {
+  background-color: #45475a;
+  color: #cdd6f4;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 20px;
+  transition: background-color 0.2s ease;
+}
+.cc-quick-toggles button:hover {
+  background-color: #525567;
+}
+.cc-quick-toggles button > button {
+  background: transparent;
+  padding: 0;
+  border: none;
+}
+.cc-quick-toggles button > button > icon {
+  font-size: inherit;
+}
+
+.cc-section {
+  background-color: rgba(69, 71, 90, 0.7);
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+.cc-section:last-child {
+  margin-bottom: 0;
+}
+.cc-section label {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #89b4fa;
+  margin-bottom: 8px;
+}
+.cc-section slider,
+.cc-section .volume-slider,
+.cc-section .brightness-slider {
+  min-height: 18px;
+  margin-top: 5px;
+}
+.cc-section slider trough,
+.cc-section .volume-slider trough,
+.cc-section .brightness-slider trough {
+  background-color: #313244;
+  border-radius: 4px;
+}
+.cc-section slider trough progress,
+.cc-section .volume-slider trough progress,
+.cc-section .brightness-slider trough progress {
+  background-color: #89b4fa;
+  border-radius: 4px;
+}
+.cc-section slider slider,
+.cc-section .volume-slider slider,
+.cc-section .brightness-slider slider {
+  background-color: #cba6f7;
+  min-width: 10px;
+  min-height: 10px;
+  border-radius: 5px;
+  border: 2px solid #313244;
+}
+
+.cc-system-actions {
+  margin-top: 10px;
+}
+.cc-system-actions button {
+  background-color: transparent;
+  color: #cdd6f4;
+  font-size: 20px;
+  padding: 6px;
+  border-radius: 6px;
+}
+.cc-system-actions button:hover {
+  background-color: #45475a;
+}
+
+.popup-mute-button {
+  background-color: transparent;
+  color: #cdd6f4;
+  border: none;
+  padding: 5px;
+  border-radius: 6px;
+  font-size: 18px;
+}
+.popup-mute-button:hover {
+  background-color: #45475a;
+}
+.popup-mute-button icon {
+  font-size: inherit;
 }/*# sourceMappingURL=style.css.map */
