@@ -1,0 +1,19 @@
+// css/layout/_topbar-layout.scss
+@use '../abstracts/variables' as variables;
+
+.bar-window {
+    background-color: variables.$background;
+    color: variables.$foreground;
+    padding: 5px 10px;
+    font-size: 16px;
+}
+
+.left-widgets {
+    padding-left: 6px;
+}
+
+.right-widgets {
+    padding-right: 6px;
+}
+
+// .center-widget-container {} // Był zakomentowany, więc pomijam

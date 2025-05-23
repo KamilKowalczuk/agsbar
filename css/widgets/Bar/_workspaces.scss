@@ -1,0 +1,27 @@
+// css/widgets/Bar/_workspaces.scss
+@use '../../abstracts/variables' as variables;
+
+.workspaces-widget {
+    padding: 2px 0;
+}
+
+.workspace-button {
+    background-color: variables.$surface0;
+    color: variables.$foreground;
+    padding: 2px 8px;
+    margin: 0 2px;
+    border-radius: variables.$border-radius-standard;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &:hover {
+        background-color: variables.$mauve;
+        color: variables.$background;
+    }
+}
+
+.workspace-button.active {
+    background-color: variables.$blue;
+    color: variables.$background;
+    font-weight: bold;
+}

@@ -1,0 +1,22 @@
+// css/components/_button.scss
+@use '../abstracts/variables' as variables;
+
+// Ta klasa była używana dla wielu przycisków wskaźników na pasku
+// oraz dla przycisku otwierającego ControlCenterPopup.
+// Jeśli niektóre z nich mają być inne, można dodać specyficzne klasy.
+.control-center-button { // To była ogólna klasa dla wielu ikon na pasku
+    background-color: transparent;
+    color: variables.$foreground;
+    padding: 4px;
+    margin: 0 1px;
+    border-radius: variables.$border-radius-standard;
+    font-size: 18px; // Domyślny rozmiar ikony dla tych przycisków
+
+    > icon {
+        font-size: inherit;
+    }
+
+    &:hover {
+        background-color: variables.$surface0;
+    }
+}

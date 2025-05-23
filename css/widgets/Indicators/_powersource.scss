@@ -1,0 +1,13 @@
+@use '../../abstracts/variables' as variables;
+
+
+// Jeśli PowerSourceWidget ma jakąś główną klasę, np. .power-source-widget
+// .power-source-widget {
+//    // Ogólne style dla kontenera widgetu, jeśli potrzebne
+// }
+
+.battery-percentage-label {
+    font-size: 13px;
+    color: variables.$foreground;
+    margin-left: 2px;
+}

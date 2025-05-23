@@ -1,0 +1,7 @@
+// css/widgets/Bar/_clock.scss
+@use '../../abstracts/variables' as variables;
+
+.clock-widget {
+    color: variables.$blue;
+    font-weight: bold;
+}

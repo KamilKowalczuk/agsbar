@@ -1,0 +1,21 @@
+// Ogólne style dla widgetu slider, jeśli nie są specyficzne tylko dla .cc-section
+// slider, // Możesz użyć nazwy tagu, jeśli AGS/GTK tak go interpretuje
+// .generic-slider-class { // Lub bardziej generycznej klasy
+//     min-height: 18px;
+//     margin-top: 5px;
+//     trough {
+//         background-color: variables.$surface0;
+//         border-radius: 4px;
+//     }
+//     trough progress {
+//         background-color: variables.$blue;
+//         border-radius: 4px;
+//     }
+//     slider { // Uchwyt suwaka
+//         background-color: variables.$mauve;
+//         min-width: 10px;
+//         min-height: 10px;
+//         border-radius: 5px;
+//         border: 2px solid variables.$surface0;
+//     }
+// }

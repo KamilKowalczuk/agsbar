@@ -1,0 +1,101 @@
+@use '../../abstracts/variables' as variables;
+
+
+.cc-quick-toggles {
+    button {
+        background-color: variables.$surface1;
+        color: variables.$foreground;
+        padding: 8px;
+        border-radius: variables.$border-radius-standard;
+        font-size: 20px;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background-color: variables.$surface1-lightened; // Użyj zdefiniowanej zmiennej
+        }
+
+        // Style dla zagnieżdżonych wskaźników, jeśli są buttonami
+        > button {
+            background: transparent;
+            padding: 0;
+            border: none;
+            > icon {
+                font-size: inherit;
+            }
+        }
+    }
+}
+
+.cc-section {
+    background-color: rgba(variables.$surface1, 0.7);
+    padding: 12px;
+    border-radius: variables.$border-radius-standard;
+    margin-bottom: 10px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    label { // Dla tytułów sekcji
+        font-weight: bold;
+        font-size: 1.1em;
+        color: variables.$blue;
+        margin-bottom: 8px;
+        // display: block; // Usunięte, bo powodowało problemy
+    }
+
+    // Style dla suwaków wewnątrz .cc-section (przeniesione z components/_slider.scss, jeśli są specyficzne tylko dla CC)
+    // Jeśli to ogólne style suwaków, powinny być w components/_slider.scss
+    slider,
+    .volume-slider,
+    .brightness-slider {
+        min-height: 18px;
+        margin-top: 5px;
+        trough {
+            background-color: variables.$surface0;
+            border-radius: 4px;
+        }
+        trough progress {
+            background-color: variables.$blue;
+            border-radius: 4px;
+        }
+        slider { // Uchwyt suwaka
+            background-color: variables.$mauve;
+            min-width: 10px;
+            min-height: 10px;
+            border-radius: 5px;
+            border: 2px solid variables.$surface0;
+        }
+    }
+}
+
+.cc-system-actions {
+    margin-top: 10px;
+    button {
+        background-color: transparent;
+        color: variables.$foreground;
+        font-size: 20px;
+        padding: 6px;
+        border-radius: variables.$border-radius-standard;
+
+        &:hover {
+            background-color: variables.$surface1;
+        }
+    }
+}
+
+// Przycisk mute specyficzny dla ControlCenter, jeśli różni się od ogólnego
+.popup-mute-button { // Jeśli ta klasa jest używana w ControlCenterPopup
+    background-color: transparent;
+    color: variables.$foreground;
+    border: none;
+    padding: 5px;
+    border-radius: variables.$border-radius-standard;
+    font-size: 18px;
+    &:hover {
+        background-color: variables.$surface1;
+    }
+    icon {
+        font-size: inherit;
+    }
+}

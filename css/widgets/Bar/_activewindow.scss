@@ -1,0 +1,9 @@
+// css/widgets/Bar/_activewindow.scss
+@use '../../abstracts/variables' as variables;
+
+.active-window-widget {
+    color: variables.$foreground;
+    font-size: 14px;
+    padding-left: 6px;
+    font-style: italic;
+}

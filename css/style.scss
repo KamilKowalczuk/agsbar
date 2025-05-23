@@ -1,371 +1,40 @@
-@use './variables';
-// Preferowane dla Dart SASS// Reset (jeśli go używasz)
-// * {
-// 	all: unset;
-// }
+// css/style.scss
 
-// Reguły stylów teraz muszą odwoływać się do zmiennych przez nazwę modułu
-.bar-window {
-	background-color: variables.$background; // Użycie zmiennej przez nazwę modułu
-	color: variables.$foreground;
-	padding: 5px 10px;
-	font-size: 16px;
-}
+// 1. Abstrakty
+@use 'abstracts/variables';
+// @use 'abstracts/mixins';
+// @use 'abstracts/functions';
 
-.clock-widget {
-	color: variables.$blue;
-	font-weight: bold;
-}
+// 2. Baza
+@use 'base/base';
+// @use 'base/typography';
 
-.date-widget {
-	color: variables.$foreground; // Możesz użyć nieco innego odcienia, jeśli chcesz odróżnić od zegara
-	font-size: 15px; // Dostosuj rozmiar, np. taki sam jak zegar lub nieco mniejszy
-	// margin-right: 5px; // Zamiast tego użyliśmy 'spacing' w kontenerze <box>
-}
+// 3. Komponenty
+@use 'components/button';
+@use 'components/slider'; // Jeśli wyodrębniłeś ogólne style suwaków
 
-//.center-widget-container {
-// Jeśli potrzebujesz dodatkowych stylów dla kontenera daty i zegara
-// Np. aby elementy były idealnie wyśrodkowane w pionie, jeśli mają różne wysokości
-//align-items: center; // Wyrównanie elementów wewnątrz boxa do środka w pionie (CSS flexbox property)
-// W GTK CSS to może być `GtkBox { align-items: center; }` lub podobne,
-// ale dla `Astal.Box` właściwość `valign` na dzieciach lub `homogeneous` na boxie
-// może być bardziej odpowiednie.
-// Na razie `halign={Gtk.Align.CENTER}` na samym boxie powinno wystarczyć dla ułożenia horyzontalnego.
-// Wertykalne wyrównanie dzieci w Gtk.Box kontroluje się inaczej niż w web flexbox.
-// Najprościej, jeśli DateWidget i ClockWidget mają ten sam rozmiar czcionki i padding.
-//}
+// 4. Layout
+@use 'layout/topbar-layout';
+@use 'layout/popup-layout';
 
-.left-widgets {
-	padding-left: 6px;
-}
+// 5. Widgety
+// Pasek
+@use 'widgets/Bar/workspaces';
+@use 'widgets/Bar/clock';
+@use 'widgets/Bar/date';
+@use 'widgets/Bar/activewindow';
+@use 'widgets/Bar/groupedindicators';
 
-.workspaces-widget {
-	padding: 2px 0;
-}
+// Wskaźniki (indywidualne, jeśli mają swoje klasy poza .control-center-button)
+@use 'widgets/Indicators/powersource';
+@use 'widgets/Indicators/ramusage';
+@use 'widgets/Indicators/cpuusage';
+@use 'widgets/Indicators/cputemp';
+@use 'widgets/Indicators/gputemp';
+// Dla Network, Volume, Bluetooth - jeśli używają tylko .control-center-button,
+// to ich style są już w components/_button.scss. Jeśli mają dodatkowe,
+// specyficzne style, stwórz dla nich pliki i zaimportuj.
 
-.workspace-button {
-	background-color: variables.$surface0;
-	color: variables.$foreground;
-	padding: 2px 8px;
-	margin: 0 2px;
-	border-radius: variables.$border-radius-standard; // Użycie nowej zmiennej
-	font-size: 14px;
-	transition: background-color 0.3s ease, color 0.3s ease;
-
-	&:hover {
-		background-color: variables.$mauve;
-		color: variables.$background;
-	}
-}
-
-.workspace-button.active {
-	background-color: variables.$blue;
-	color: variables.$background;
-	font-weight: bold;
-}
-
-.active-window-widget {
-	color: variables.$foreground;
-	font-size: 14px;
-	padding-left: 6px;
-	font-style: italic;
-}
-
-.right-widgets {
-	padding-right: 6px;
-}
-
-.control-center-button {
-	background-color: transparent;
-	color: variables.$foreground;
-	padding: 4px;
-	margin: 0 1px;
-	border-radius: variables.$border-radius-standard;
-	font-size: 18px;
-
-	> icon {
-		font-size: inherit;
-	}
-
-	&:hover {
-		background-color: variables.$surface0;
-	}
-}
-
-// Style dla tooltipa (jeśli zdecydujemy się je dodać z powrotem)
-// Pamiętaj, że stylowanie systemowych tooltipów GTK z poziomu CSS aplikacji bywa trudne.
-// window#gtk-tooltip {
-//   background-color: variables.$surface0;
-//   color: variables.$foreground;
-//   border: 1px solid variables.$surface1;
-//   border-radius: variables.$border-radius-standard;
-//   padding: 8px 12px;
-//   font-size: 13px;
-//   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
-
-//   label {
-//     color: variables.$foreground;
-//   }
-// }
-
-// Style dla pop-upa głośności
-.volume-popup-window {
-	background-color: variables.$surface0;
-	color: variables.$foreground;
-	border-radius: variables.$border-radius-standard;
-	border: 1px solid variables.$surface1;
-}
-
-.volume-popup-content {
-	padding: 12px;
-	min-height: 40px;
-
-	.popup-mute-button {
-		background-color: transparent;
-		color: variables.$foreground;
-		border: none;
-		padding: 5px;
-		border-radius: 6px; // Można użyć $border-radius-standard
-		&:hover {
-			background-color: variables.$surface1;
-		}
-		icon {
-			font-size: 20px;
-		}
-	}
-
-	.volume-slider {
-		min-height: 20px;
-		min-width: 150px;
-		// Style dla suwaka (trough, progress, slider) mogą wymagać specyficznych selektorów GTK
-		// trough { background-color: variables.$surface1; border-radius: 5px; }
-		// trough progress { background-color: variables.$blue; border-radius: 5px; }
-	}
-}
-
-// Style dla procentów baterii (jeśli zdecydujemy się je dodać)
-.battery-percentage-label {
-	font-size: 13px;
-	color: variables.$foreground;
-	margin-left: 2px;
-	//   &:empty {
-	//     display: none;
-	//   }
-}
-
-.ram-usage-indicator {
-	color: variables.$foreground;
-	font-size: 14px; // Dopasuj do reszty paska
-	padding: 0 4px; // Mały padding, jeśli jest w grupie
-
-	icon {
-		font-size: 16px; // Rozmiar ikony
-		// color: $blue; // Możesz nadać ikonie inny kolor akcentu
-	}
-
-	label {
-		margin-left: 4px;
-	}
-}
-
-.cpu-usage-indicator {
-	color: variables.$foreground;
-	font-size: 14px;
-	padding: 0 4px;
-
-	icon {
-		font-size: 16px;
-		// color: $mauve; // Możesz nadać ikonie inny kolor akcentu
-	}
-
-	label {
-		margin-left: 4px;
-	}
-}
-.cpu-temp-indicator {
-	color: variables.$foreground;
-	font-size: 14px;
-	padding: 0 4px;
-
-	icon {
-		font-size: 16px;
-		// color: $red; // Możesz nadać specjalny kolor, np. gdy temp jest wysoka
-	}
-
-	label {
-		margin-left: 4px;
-	}
-}
-.gpu-temp-indicator {
-	color: variables.$foreground;
-	font-size: 14px;
-	padding: 0 4px;
-
-	icon {
-		font-size: 16px;
-		// color: $orange; // Możesz użyć innej zmiennej koloru dla GPU
-	}
-
-	label {
-		margin-left: 4px;
-	}
-}
-.grouped-indicators-button {
-	background-color: transparent; // Lub lekko inny niż tło paska, np. variables.$surface0
-	padding: 2px 5px; // Dopasuj padding
-	margin: 0 2px;
-	border-radius: variables.$border-radius-standard;
-	transition: background-color 0.2s ease;
-
-	&:hover {
-		background-color: variables.$surface1; // Podświetlenie przy najechaniu
-	}
-	.grouped-indicators-box {
-		// Styl dla wewnętrznego boxa, jeśli potrzebny
-		// Wskaźniki wewnątrz (Network, Power, Volume, Bluetooth) powinny mieć swoje style
-		// ale ich kontenery (buttony) mogą potrzebować resetu niektórych stylów, aby wyglądać jak część większego przycisku
-		// np. usunięcie własnego tła lub obramowania, jeśli GroupedIndicatorsButton ma swoje.
-
-		// Przykładowo, jeśli wskaźniki wewnątrz są buttonami, możemy chcieć to zmienić:
-		> button {
-			// Celuje w bezpośrednie dzieci typu button w .grouped-indicators-box
-			background-color: transparent; // Usuń tło wewnętrznych przycisków
-			padding: 0 2px; // Zmniejsz padding wewnętrznych przycisków
-			margin: 0; // Usuń marginesy wewnętrznych przycisków
-
-			&:hover {
-				background-color: transparent; // Wyłącz hover wewnętrznych
-			}
-
-			> icon {
-				font-size: 16px; // Ujednolicony rozmiar ikon w grupie
-			}
-			// Jeśli masz label w tych wskaźnikach (np. procent baterii), ukryj go
-
-			.battery-percentage-label {
-				// Specjalnie dla procentów baterii
-				font-size: 11px; // Mniejsza czcionka, jeśli widoczna
-				margin-left: 1px;
-			}
-		}
-	}
-}
-.control-center-popup-window {
-	background-color: variables.$surface0; // Podstawowe, nieprzezroczyste tło dla całego okna popupa
-	color: variables.$foreground; // Domyślny kolor tekstu dla popupa
-	border-radius: variables.$border-radius-standard + 4px;
-	border: 1px solid variables.$surface1;
-	padding: 0; // Usuwamy padding z samego okna, bo content będzie miał swój
-
-	// Jeśli używasz gtk-layer-shell i chcesz mieć pewność, że okno jest "rysowane"
-	// Można spróbować dodać minimalne wymiary, chociaż zawartość powinna je nadać.
-	min-width: 300px; // Przeniesione do inline CSS w JSX
-	min-height: 400px; // Przeniesione do inline CSS w JSX
-}
-.control-center-content {
-	background-color: transparent; // Wewnętrzny box może być przezroczysty, jeśli okno ma już tło
-	// Jeśli .control-center-popup-window nie łapie tła, ustaw je tutaj:
-	// background-color: variables.$surface0;
-	color: variables.$foreground; // Upewnij się, że tekst wewnątrz ma kolor
-	// padding: 15px; // Masz to już w inline CSS, co jest OK
-}
-.cc-quick-toggles {
-	// background-color: variables.$surface1; // Opcjonalne tło dla tej sekcji
-	// padding: 8px;
-	// border-radius: variables.$border-radius-standard;
-	// margin-bottom: 10px;
-
-	button {
-		background-color: variables.$surface1;
-		color: variables.$foreground;
-		padding: 8px;
-		border-radius: variables.$border-radius-standard;
-		font-size: 20px; // Dla ikon
-		transition: background-color 0.2s ease;
-
-		&:hover {
-			background-color: variables.$surface1-lightened; // Lekkie rozjaśnienie
-		}
-
-		// Jeśli wskaźniki (NetworkIndicatorWidget itp.) są wewnątrz tych buttonów
-		// i są same w sobie buttonami, musimy ostylować je odpowiednio.
-		> button {
-			// Celuje w NetworkIndicatorWidget itp. jeśli są buttonami
-			background: transparent;
-			padding: 0;
-			border: none;
-			> icon {
-				font-size: inherit; // Dziedzicz rozmiar ikony
-			}
-		}
-	}
-}
-.cc-section {
-	background-color: rgba(variables.$surface1, 0.7);
-	padding: 12px;
-	border-radius: variables.$border-radius-standard;
-	margin-bottom: 10px; // Dodaj, jeśli spacing na .control-center-content nie wystarcza
-
-	&:last-child {
-		margin-bottom: 0;
-	}
-
-	label {
-		font-weight: bold;
-		font-size: 1.1em;
-		color: variables.$blue;
-		margin-bottom: 8px;
-		//display: block; // Powoduje problem z wyświetlaniem
-	}
-
-	slider,
-	.volume-slider,
-	.brightness-slider {
-		min-height: 18px;
-		margin-top: 5px; // Odstęp od labelki
-		trough {
-			background-color: variables.$surface0;
-			border-radius: 4px;
-		}
-		trough progress {
-			background-color: variables.$blue;
-			border-radius: 4px;
-		}
-		slider {
-			// Uchwyt suwaka
-			background-color: variables.$mauve;
-			min-width: 10px;
-			min-height: 10px;
-			border-radius: 5px;
-			border: 2px solid variables.$surface0; // Obramowanie dla lepszego wyglądu
-		}
-	}
-}
-.cc-system-actions {
-	margin-top: 10px; // Dodatkowy odstęp od góry dla tej sekcji
-	button {
-		background-color: transparent;
-		color: variables.$foreground;
-		font-size: 20px;
-		padding: 6px;
-		border-radius: variables.$border-radius-standard;
-
-		&:hover {
-			background-color: variables.$surface1;
-		}
-	}
-}
-.popup-mute-button {
-	background-color: transparent;
-	color: variables.$foreground;
-	border: none;
-	padding: 5px;
-	border-radius: variables.$border-radius-standard;
-	font-size: 18px;
-	&:hover {
-		background-color: variables.$surface1;
-	}
-	icon {
-		font-size: inherit;
-	}
-}
+// Popups
+@use 'widgets/Popups/controlcenter';
+// @use 'widgets/Popups/volumesliderpopup';

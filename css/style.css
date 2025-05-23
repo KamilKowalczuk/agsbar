@@ -1,3 +1,18 @@
+.control-center-button {
+  background-color: transparent;
+  color: #cdd6f4;
+  padding: 4px;
+  margin: 0 1px;
+  border-radius: 6px;
+  font-size: 18px;
+}
+.control-center-button > icon {
+  font-size: inherit;
+}
+.control-center-button:hover {
+  background-color: #313244;
+}
+
 .bar-window {
   background-color: #1e1e2e;
   color: #cdd6f4;
@@ -5,18 +20,25 @@
   font-size: 16px;
 }
 
-.clock-widget {
-  color: #89b4fa;
-  font-weight: bold;
-}
-
-.date-widget {
-  color: #cdd6f4;
-  font-size: 15px;
-}
-
 .left-widgets {
   padding-left: 6px;
+}
+
+.right-widgets {
+  padding-right: 6px;
+}
+
+.control-center-popup-window {
+  background-color: #313244;
+  color: #cdd6f4;
+  border-radius: 10px;
+  border: 1px solid #45475a;
+  padding: 0;
+}
+
+.control-center-content {
+  background-color: transparent;
+  color: #cdd6f4;
 }
 
 .workspaces-widget {
@@ -43,6 +65,16 @@
   font-weight: bold;
 }
 
+.clock-widget {
+  color: #89b4fa;
+  font-weight: bold;
+}
+
+.date-widget {
+  color: #cdd6f4;
+  font-size: 15px;
+}
+
 .active-window-widget {
   color: #cdd6f4;
   font-size: 14px;
@@ -50,52 +82,30 @@
   font-style: italic;
 }
 
-.right-widgets {
-  padding-right: 6px;
-}
-
-.control-center-button {
+.grouped-indicators-button {
   background-color: transparent;
-  color: #cdd6f4;
-  padding: 4px;
-  margin: 0 1px;
+  padding: 2px 5px;
+  margin: 0 2px;
   border-radius: 6px;
-  font-size: 18px;
+  transition: background-color 0.2s ease;
 }
-.control-center-button > icon {
-  font-size: inherit;
-}
-.control-center-button:hover {
-  background-color: #313244;
-}
-
-.volume-popup-window {
-  background-color: #313244;
-  color: #cdd6f4;
-  border-radius: 6px;
-  border: 1px solid #45475a;
-}
-
-.volume-popup-content {
-  padding: 12px;
-  min-height: 40px;
-}
-.volume-popup-content .popup-mute-button {
-  background-color: transparent;
-  color: #cdd6f4;
-  border: none;
-  padding: 5px;
-  border-radius: 6px;
-}
-.volume-popup-content .popup-mute-button:hover {
+.grouped-indicators-button:hover {
   background-color: #45475a;
 }
-.volume-popup-content .popup-mute-button icon {
-  font-size: 20px;
+.grouped-indicators-button .grouped-indicators-box > button {
+  background-color: transparent;
+  padding: 0 2px;
+  margin: 0;
 }
-.volume-popup-content .volume-slider {
-  min-height: 20px;
-  min-width: 150px;
+.grouped-indicators-button .grouped-indicators-box > button:hover {
+  background-color: transparent;
+}
+.grouped-indicators-button .grouped-indicators-box > button > icon {
+  font-size: 16px;
+}
+.grouped-indicators-button .grouped-indicators-box > button .battery-percentage-label {
+  font-size: 11px;
+  margin-left: 1px;
 }
 
 .battery-percentage-label {
@@ -150,47 +160,6 @@
 }
 .gpu-temp-indicator label {
   margin-left: 4px;
-}
-
-.grouped-indicators-button {
-  background-color: transparent;
-  padding: 2px 5px;
-  margin: 0 2px;
-  border-radius: 6px;
-  transition: background-color 0.2s ease;
-}
-.grouped-indicators-button:hover {
-  background-color: #45475a;
-}
-.grouped-indicators-button .grouped-indicators-box > button {
-  background-color: transparent;
-  padding: 0 2px;
-  margin: 0;
-}
-.grouped-indicators-button .grouped-indicators-box > button:hover {
-  background-color: transparent;
-}
-.grouped-indicators-button .grouped-indicators-box > button > icon {
-  font-size: 16px;
-}
-.grouped-indicators-button .grouped-indicators-box > button .battery-percentage-label {
-  font-size: 11px;
-  margin-left: 1px;
-}
-
-.control-center-popup-window {
-  background-color: #313244;
-  color: #cdd6f4;
-  border-radius: 10px;
-  border: 1px solid #45475a;
-  padding: 0;
-  min-width: 300px;
-  min-height: 400px;
-}
-
-.control-center-content {
-  background-color: transparent;
-  color: #cdd6f4;
 }
 
 .cc-quick-toggles button {

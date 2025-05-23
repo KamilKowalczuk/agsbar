@@ -1,0 +1,7 @@
+// css/widgets/Bar/_date.scss
+@use '../../abstracts/variables' as variables;
+
+.date-widget {
+    color: variables.$foreground;
+    font-size: 15px;
+}

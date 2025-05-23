@@ -1,0 +1,17 @@
+@use '../../abstracts/variables' as variables;
+
+
+.gpu-temp-indicator {
+    color: variables.$foreground;
+    font-size: 14px;
+    padding: 0 4px;
+
+    icon {
+        font-size: 16px;
+        // color: variables.$orange; // Odkomentuj, jeśli chcesz specyficzny kolor
+    }
+
+    label {
+        margin-left: 4px;
+    }
+}
