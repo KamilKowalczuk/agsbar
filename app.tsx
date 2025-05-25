@@ -4,6 +4,7 @@ import GLib from 'gi://GLib';
 // Zaimportuj tylko te moduły, które muszą być "uruchomione" lub których komponenty są tu bezpośrednio używane.
 // Jeśli sharedState.ts sam inicjuje swoje odpytywanie, wystarczy go zaimportować dla efektu ubocznego.
 import './lib/sharedState'; // Uruchomi logikę w sharedState.ts (w tym odpytywanie głośności)
+import { PopupOverlay } from './widgets/Popups/PopupOverlay'; // NOWY IMPORT
 
 // Główny komponent paska i komponenty okien pop-up
 import { TopBar } from './widgets/Bar/TopBar';
@@ -26,6 +27,9 @@ Object.assign(globalThis, {
 	FILL: Gtk.Align.FILL,
 });
 
+export const CONTROL_CENTER_POPUP_NAME = 'control-center-popup';
+export const POPUP_OVERLAY_NAME = 'popup-overlay'; // Nazwa dla naszej nowej nakładki
+
 console.log('AGS szuka ikon w:', customIconDir);
 
 App.start({
@@ -37,6 +41,7 @@ App.start({
 		TopBar(mainMonitorId);
 		ControlCenterPopup(); // Tworzymy nowy Control Center
 		//VolumeSliderPopup();
+		PopupOverlay();
 	},
 });
 

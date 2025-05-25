@@ -14,3 +14,14 @@
     color: variables.$foreground;
     // padding jest w inline CSS
 }
+
+// W css/layout/_popup-layout.scss
+// ... (istniejące style dla .control-center-popup-window) ...
+
+.popup-overlay-window {
+    //background-color: transparent; // Całkowicie przezroczyste tło
+     background-color: rgba(0, 0, 255, 0.1);
+    // Możesz też użyć bardzo delikatnego przyciemnienia, jeśli chcesz feedbacku, np.:
+    // background-color: rgba(variables.$background, 0.1);
+}
+

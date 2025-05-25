@@ -41,6 +41,10 @@
   color: #cdd6f4;
 }
 
+.popup-overlay-window {
+  background-color: rgba(0, 0, 255, 0.1);
+}
+
 .workspaces-widget {
   padding: 2px 0;
 }

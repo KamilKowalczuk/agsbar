@@ -15,7 +15,7 @@ export const VolumeSliderPopup = () => {
 			name="volume-popup"
 			application={App}
 			className="volume-popup-window test-popup"
-			type={Gtk.WindowType.TOPLEVEL}
+			//type={Gtk.WindowType.TOPLEVEL}
 			focusable={true}
 			decorated={true}
 			resizable={true}
