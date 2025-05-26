@@ -1,27 +1,32 @@
 @use '../abstracts/variables' as variables;
 
 .control-center-popup-window {
-    background-color: variables.$surface0;
-    color: variables.$foreground;
-    border-radius: variables.$border-radius-standard + 4px;
-    border: 1px solid variables.$surface1;
-    padding: 0;
-    // min-width i min-height są w inline CSS w komponencie TSX
+	background-color: variables.$surface0;
+	color: variables.$foreground;
+	border-radius: variables.$border-radius-standard + 4px;
+	border: 1px solid variables.$surface1;
+	padding: 0;
+	// min-width i min-height są w inline CSS w komponencie TSX
 }
 
 .control-center-content {
-    background-color: transparent;
-    color: variables.$foreground;
-    // padding jest w inline CSS
+	background-color: transparent;
+	color: variables.$foreground;
+	// padding jest w inline CSS
 }
 
 // W css/layout/_popup-layout.scss
 // ... (istniejące style dla .control-center-popup-window) ...
 
 .popup-overlay-window {
-    //background-color: transparent; // Całkowicie przezroczyste tło
-     background-color: rgba(0, 0, 255, 0.1);
-    // Możesz też użyć bardzo delikatnego przyciemnienia, jeśli chcesz feedbacku, np.:
-    // background-color: rgba(variables.$background, 0.1);
+	background-color: rgba(
+		0,
+		0,
+		0,
+		0.01
+	); // Bardzo lekko widoczne dla debugowania, lub 0.1 dla wyraźniejszego efektu
+	// Jeśli chcesz całkowicie niewidoczne tło, ale nadal klikalne:
+	// background-color: transparent;
+	// Musisz wtedy upewnić się, że okno jest "app-paintable" i rysujesz coś (nawet w pełni przezroczystego),
+	// ale prościej jest użyć minimalnie widocznego tła.
 }
-

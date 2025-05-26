@@ -1,5 +1,6 @@
 import { App, Astal, Gtk } from 'astal/gtk3';
 import GLib from 'gi://GLib';
+import Variable from 'astal/variable';
 
 // Zaimportuj tylko te moduły, które muszą być "uruchomione" lub których komponenty są tu bezpośrednio używane.
 // Jeśli sharedState.ts sam inicjuje swoje odpytywanie, wystarczy go zaimportować dla efektu ubocznego.
@@ -12,6 +13,10 @@ import { TopBar } from './widgets/Bar/TopBar';
 import { ControlCenterPopup } from './widgets/Popups/ControlCenterPopup';
 
 const customIconDir = GLib.get_home_dir() + '/.config/ags/assets/icons';
+
+export const POPUP_CLICKED_INSIDE = Variable(false);
+export const CONTROL_CENTER_POPUP_NAME = 'control-center-popup';
+export const POPUP_OVERLAY_NAME = 'popup-overlay';
 
 declare global {
 	const START: Gtk.Align;
@@ -26,9 +31,6 @@ Object.assign(globalThis, {
 	END: Gtk.Align.END,
 	FILL: Gtk.Align.FILL,
 });
-
-export const CONTROL_CENTER_POPUP_NAME = 'control-center-popup';
-export const POPUP_OVERLAY_NAME = 'popup-overlay'; // Nazwa dla naszej nowej nakładki
 
 console.log('AGS szuka ikon w:', customIconDir);
 

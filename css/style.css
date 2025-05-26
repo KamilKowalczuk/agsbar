@@ -42,7 +42,7 @@
 }
 
 .popup-overlay-window {
-  background-color: rgba(0, 0, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.01);
 }
 
 .workspaces-widget {
