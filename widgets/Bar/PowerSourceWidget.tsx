@@ -149,7 +149,7 @@ export const PowerSourceWidget = () => {
 					newIcon = 'speedometer-symbolic';
 					profileNameFriendly = 'Wydajność';
 				} else if (activeProfile.includes('power-saver')) {
-					newIcon = 'leaf-symbolic';
+					newIcon = 'preferences-desktop-screensaver-symbolic';
 					profileNameFriendly = 'Oszczędzanie energii';
 				}
 				icon.set(newIcon);

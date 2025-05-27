@@ -2,9 +2,12 @@ $background: #1e1e2e;
 $foreground: #cdd6f4;
 $surface0: #313244;
 $surface1: #45475a;
+$surface2: #585b70; // Ciemniejszy szary (Catppuccin surface2)
 $surface1-lightened: #525567;
 $blue: #89b4fa;
 $mauve: #cba6f7;
+$text: #{$foreground}; // Ogólny tekst
+$crust: #11111b;   // Najciemniejsze tło (Catppuccin crust)
 
 // Możesz tu dodać inne zmienne, np. dotyczące czcionek, zaokrągleń itp.
 // $font-family-main: 'Twoja Ulubiona Czcionka', sans-serif;

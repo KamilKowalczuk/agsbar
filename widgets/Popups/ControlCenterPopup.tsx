@@ -12,8 +12,8 @@ import {
 import { QuickTogglesSection } from '../ControlCenter/QuickTogglesSection';
 import { VolumeSection } from '../ControlCenter/VolumeSection';
 import { BrightnessSection } from '../ControlCenter/BrightnessSection';
-import { PowerSection } from '../ControlCenter/PowerProfilesSection';
 import { SystemActionsSection } from '../ControlCenter/SystemActionsSection';
+import { PowerProfilesSection } from '../ControlCenter/PowerProfilesSection'; // NOWY IMPORT
 // Importy wskaźników i serwisów, które były tu wcześniej, a teraz są w sekcjach, zostały usunięte.
 
 const GdkRuntime = imports.gi.Gdk;
@@ -38,9 +38,6 @@ export const ControlCenterPopup = () => {
 			keymode={Astal.Keymode.ON_DEMAND}
 			setup={(self: Gtk.Window) => {
 				self.hide();
-				console.log(
-					`[${CONTROL_CENTER_POPUP_NAME}] Setup: Window initialized (Layer OVERLAY), hidden.`
-				);
 				self.set_skip_taskbar_hint(true);
 				self.set_skip_pager_hint(true);
 
@@ -50,52 +47,30 @@ export const ControlCenterPopup = () => {
 
 				self.add_events(GdkRuntime.EventMask.BUTTON_PRESS_MASK);
 				selfButtonPressHandlerId = self.connect('button-press-event', () => {
-					console.log(
-						`[${CONTROL_CENTER_POPUP_NAME}] Clicked INSIDE self. Setting flag.`
-					);
 					POPUP_CLICKED_INSIDE.set(true);
 					return GdkRuntime.EVENT_PROPAGATE;
 				});
 
 				showHandlerId = self.connect('show', () => {
-					console.log(`[${CONTROL_CENTER_POPUP_NAME}] Signal 'show'.`);
 					POPUP_CLICKED_INSIDE.set(false);
 
 					const overlay = App.get_window(POPUP_OVERLAY_NAME);
 					if (overlay && !overlay.visible) {
-						console.log(
-							`[${CONTROL_CENTER_POPUP_NAME}] Showing overlay '${POPUP_OVERLAY_NAME}'.`
-						);
 						overlay.show();
 					}
 
 					GLib.timeout_add(GLib.PRIORITY_DEFAULT_IDLE, 50, () => {
 						if (self.visible) {
-							console.log(
-								`[${CONTROL_CENTER_POPUP_NAME}] Attempting to raise and grab focus.`
-							);
 							self.get_window()?.raise();
 							self.grab_focus();
-
-							if (self.has_focus) {
-								console.log(`[${CONTROL_CENTER_POPUP_NAME}] Focus grabbed.`);
-							} else {
-								console.warn(
-									`[${CONTROL_CENTER_POPUP_NAME}] FAILED to grab focus.`
-								);
-							}
 						}
 						return GLib.SOURCE_REMOVE;
 					});
 				});
 
 				hideHandlerId = self.connect('hide', () => {
-					console.log(`[${CONTROL_CENTER_POPUP_NAME}] Signal 'hide'.`);
 					const overlay = App.get_window(POPUP_OVERLAY_NAME);
 					if (overlay?.visible) {
-						console.log(
-							`[${CONTROL_CENTER_POPUP_NAME}] Hiding overlay '${POPUP_OVERLAY_NAME}'.`
-						);
 						overlay.hide();
 					}
 				});
@@ -105,9 +80,6 @@ export const ControlCenterPopup = () => {
 					(_widget, event) => {
 						const keyval = event.get_keyval()[1];
 						if (keyval === GdkRuntime.KEY_Escape) {
-							console.log(
-								`[${CONTROL_CENTER_POPUP_NAME}] Escape pressed. Closing self.`
-							);
 							self.hide();
 							return GdkRuntime.EVENT_STOP;
 						}
@@ -116,7 +88,6 @@ export const ControlCenterPopup = () => {
 				);
 
 				self.connect('destroy', () => {
-					console.log(`[${CONTROL_CENTER_POPUP_NAME}] Destroyed.`);
 					if (showHandlerId) self.disconnect(showHandlerId);
 					if (hideHandlerId) self.disconnect(hideHandlerId);
 					if (keyPressHandlerId) self.disconnect(keyPressHandlerId);
@@ -135,7 +106,7 @@ export const ControlCenterPopup = () => {
 				<QuickTogglesSection />
 				<VolumeSection />
 				<BrightnessSection />
-				<PowerSection />
+				<PowerProfilesSection /> 
 				{/* Tutaj dodasz więcej sekcji w przyszłości, np. NetworkSection, BluetoothSection, VpnSection */}
 
 				{/* Sekcja Akcji Systemowych na samym dole, wypchnięta przez vexpand w jej własnym <box> */}

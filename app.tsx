@@ -32,8 +32,6 @@ Object.assign(globalThis, {
 	FILL: Gtk.Align.FILL,
 });
 
-console.log('AGS szuka ikon w:', customIconDir);
-
 App.start({
 	css: './css/style.css',
 	icons: customIconDir,

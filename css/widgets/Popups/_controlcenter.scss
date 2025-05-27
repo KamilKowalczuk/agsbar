@@ -1,101 +1,173 @@
 @use '../../abstracts/variables' as variables;
 
-
 .cc-quick-toggles {
-    button {
-        background-color: variables.$surface1;
-        color: variables.$foreground;
-        padding: 8px;
-        border-radius: variables.$border-radius-standard;
-        font-size: 20px;
-        transition: background-color 0.2s ease;
+	button {
+		background-color: variables.$surface1;
+		color: variables.$foreground;
+		padding: 8px;
+		border-radius: variables.$border-radius-standard;
+		font-size: 20px;
+		transition: background-color 0.2s ease;
 
-        &:hover {
-            background-color: variables.$surface1-lightened; // Użyj zdefiniowanej zmiennej
-        }
+		&:hover {
+			background-color: variables.$surface1-lightened; // Użyj zdefiniowanej zmiennej
+		}
 
-        // Style dla zagnieżdżonych wskaźników, jeśli są buttonami
-        > button {
-            background: transparent;
-            padding: 0;
-            border: none;
-            > icon {
-                font-size: inherit;
-            }
-        }
-    }
+		// Style dla zagnieżdżonych wskaźników, jeśli są buttonami
+		> button {
+			background: transparent;
+			padding: 0;
+			border: none;
+			> icon {
+				font-size: inherit;
+			}
+		}
+	}
 }
 
 .cc-section {
-    background-color: rgba(variables.$surface1, 0.7);
-    padding: 12px;
-    border-radius: variables.$border-radius-standard;
-    margin-bottom: 10px;
+	background-color: rgba(variables.$surface1, 0.7);
+	padding: 12px;
+	border-radius: variables.$border-radius-standard;
+	margin-bottom: 10px;
 
-    &:last-child {
-        margin-bottom: 0;
-    }
+	&:last-child {
+		margin-bottom: 0;
+	}
 
-    label { // Dla tytułów sekcji
-        font-weight: bold;
-        font-size: 1.1em;
-        color: variables.$blue;
-        margin-bottom: 8px;
-        // display: block; // Usunięte, bo powodowało problemy
-    }
+	label {
+		// Dla tytułów sekcji
+		font-weight: bold;
+		font-size: 1.1em;
+		color: variables.$blue;
+		margin-bottom: 8px;
+		// display: block; // Usunięte, bo powodowało problemy
+	}
 
-    // Style dla suwaków wewnątrz .cc-section (przeniesione z components/_slider.scss, jeśli są specyficzne tylko dla CC)
-    // Jeśli to ogólne style suwaków, powinny być w components/_slider.scss
-    slider,
-    .volume-slider,
-    .brightness-slider {
-        min-height: 18px;
-        margin-top: 5px;
-        trough {
-            background-color: variables.$surface0;
-            border-radius: 4px;
-        }
-        trough progress {
-            background-color: variables.$blue;
-            border-radius: 4px;
-        }
-        slider { // Uchwyt suwaka
-            background-color: variables.$mauve;
-            min-width: 10px;
-            min-height: 10px;
-            border-radius: 5px;
-            border: 2px solid variables.$surface0;
-        }
-    }
+	// Style dla suwaków wewnątrz .cc-section (przeniesione z components/_slider.scss, jeśli są specyficzne tylko dla CC)
+	// Jeśli to ogólne style suwaków, powinny być w components/_slider.scss
+	slider,
+	.volume-slider,
+	.brightness-slider {
+		min-height: 18px;
+		margin-top: 5px;
+		trough {
+			background-color: variables.$surface0;
+			border-radius: 4px;
+		}
+		trough progress {
+			background-color: variables.$blue;
+			border-radius: 4px;
+		}
+		slider {
+			// Uchwyt suwaka
+			background-color: variables.$mauve;
+			min-width: 10px;
+			min-height: 10px;
+			border-radius: 5px;
+			border: 2px solid variables.$surface0;
+		}
+	}
 }
 
 .cc-system-actions {
-    margin-top: 10px;
-    button {
-        background-color: transparent;
-        color: variables.$foreground;
-        font-size: 20px;
-        padding: 6px;
-        border-radius: variables.$border-radius-standard;
+	margin-top: 10px;
+	button {
+		background-color: transparent;
+		color: variables.$foreground;
+		font-size: 20px;
+		padding: 6px;
+		border-radius: variables.$border-radius-standard;
 
-        &:hover {
-            background-color: variables.$surface1;
-        }
-    }
+		&:hover {
+			background-color: variables.$surface1;
+		}
+	}
 }
 
 // Przycisk mute specyficzny dla ControlCenter, jeśli różni się od ogólnego
-.popup-mute-button { // Jeśli ta klasa jest używana w ControlCenterPopup
-    background-color: transparent;
-    color: variables.$foreground;
-    border: none;
-    padding: 5px;
-    border-radius: variables.$border-radius-standard;
-    font-size: 18px;
-    &:hover {
-        background-color: variables.$surface1;
-    }
-    icon {
-        font-size: inherit;
-    }
+.popup-mute-button {
+	// Jeśli ta klasa jest używana w ControlCenterPopup
+	background-color: transparent;
+	color: variables.$foreground;
+	border: none;
+	padding: 5px;
+	border-radius: variables.$border-radius-standard;
+	font-size: 18px;
+	&:hover {
+		background-color: variables.$surface1;
+	}
+	icon {
+		font-size: inherit;
+	}
+}
+.power-profiles-section {
+	// Możesz dodać specyficzne marginesy/paddingi dla tej sekcji, jeśli potrzebne
+	// np. margin-top: 5px;
+}
+
+.power-profiles-buttons {
+	// Styl dla kontenera przycisków, jeśli potrzebny
+}
+
+.power-profile-button {
+	background-color: variables.$surface1; // Kolor nieaktywnej "pigułki"
+	color: variables.$text; // Użyj zmiennej dla koloru tekstu, np. $text lub $foreground
+	padding: 10px 5px; // Zwiększony padding dla lepszego wyglądu
+	border-radius: variables.$border-radius-standard + 4px; // Bardziej zaokrąglone jak pigułki
+	transition: background-color 0.2s ease, color 0.2s ease;
+	min-height: 70px; // Aby przyciski miały trochę wysokości
+
+	// Styl dla wewnętrznego boxa, aby wycentrować zawartość
+	> box {
+		padding: 5px;
+	}
+
+	icon {
+		// Rozmiar ikony już ustawiony w JSX, można tu dodać kolor, jeśli potrzebny
+	}
+
+	label {
+		font-size: 0.8em; // Mniejsza czcionka dla nazwy profilu
+		// color: variables.$subtext0; // Możesz użyć koloru dla mniej ważnego tekstu
+	}
+
+	&:hover {
+		background-color: variables.$surface2; // Lekkie podświetlenie przy najechaniu
+		// Upewnij się, że masz zdefiniowaną zmienną $surface2
+		// lub użyj innej, np. rozjaśnionej $surface1
+	}
+
+	&.active {
+		background-color: variables.$blue; // Kolor aktywnej "pigułki" (np. Catppuccin Blue)
+		color: variables.$crust; // Kolor tekstu na aktywnym tle (np. Catppuccin Crust lub Base)
+		font-weight: bold;
+
+		icon {
+			// Możesz zmienić kolor ikony na aktywnym przycisku, jeśli standardowy nie pasuje
+			// color: variables.$base;
+		}
+		label {
+			// Ogólny styl dla etykiety wewnątrz przycisku
+			font-size: 0.8em;
+			// color: variables.$subtext0; // Domyślny kolor etykiety, jeśli chcesz inny niż główny $text
+		}
+
+		&.active {
+			background-color: variables.$blue;
+			color: variables.$crust; // To ustawia domyślny kolor dla wszystkiego wewnątrz, co dziedziczy
+			font-weight: bold;
+
+			icon {
+				// Jeśli chcesz specyficzny kolor dla ikony w aktywnym przycisku:
+				// color: variables.$crust; // Lub inny kontrastujący kolor, np. $base lub $mantle z Catppuccin
+			}
+			label {
+				color: variables.$crust; // Ustawia kolor etykiety na taki sam jak ogólny `color` dla `.active`
+				// lub wybierz inny kontrastujący kolor, np. $base, $text, $mantle
+				// Ważne, aby był czytelny na tle $blue.
+				// Jeśli $crust to np. #11111b, to będzie dobrze kontrastować z $blue (#89b4fa)
+			}
+		}
+	}
 }

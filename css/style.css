@@ -256,4 +256,38 @@
 }
 .popup-mute-button icon {
   font-size: inherit;
+}
+
+.power-profile-button {
+  background-color: #45475a;
+  color: #cdd6f4;
+  padding: 10px 5px;
+  border-radius: 10px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  min-height: 70px;
+}
+.power-profile-button > box {
+  padding: 5px;
+}
+.power-profile-button label {
+  font-size: 0.8em;
+}
+.power-profile-button:hover {
+  background-color: #585b70;
+}
+.power-profile-button.active {
+  background-color: #89b4fa;
+  color: #11111b;
+  font-weight: bold;
+}
+.power-profile-button.active label {
+  font-size: 0.8em;
+}
+.power-profile-button.active.active {
+  background-color: #89b4fa;
+  color: #11111b;
+  font-weight: bold;
+}
+.power-profile-button.active.active label {
+  color: #11111b;
 }/*# sourceMappingURL=style.css.map */

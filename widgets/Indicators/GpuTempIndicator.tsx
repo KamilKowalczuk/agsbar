@@ -32,9 +32,6 @@ const findAmdGpuTempPath = async () => {
 			/* ignoruj */
 		}
 	}
-	console.warn(
-		'GpuTempIndicator: Nie udało się automatycznie znaleźć ścieżki temperatury AMD GPU.'
-	);
 };
 
 // getGpuTemp POZOSTAJE async
