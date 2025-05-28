@@ -1,17 +1,17 @@
 @use '../abstracts/variables' as variables;
 
 .control-center-popup-window {
-	background-color: variables.$surface0;
+	background-color: variables.$surface0t;
 	color: variables.$foreground;
 	border-radius: variables.$border-radius-standard + 4px;
 	border: 1px solid variables.$surface1;
 	padding: 0;
-	// min-width i min-height są w inline CSS w komponencie TSX
+	//min-width i min-height są w inline CSS w komponencie TSX
 }
 
 .control-center-content {
 	background-color: transparent;
-	color: variables.$foreground;
+	//color: variables.$foreground;
 	// padding jest w inline CSS
 }
 

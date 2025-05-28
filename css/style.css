@@ -29,7 +29,7 @@
 }
 
 .control-center-popup-window {
-  background-color: #313244;
+  background-color: rgba(49, 50, 68, 0.9);
   color: #cdd6f4;
   border-radius: 10px;
   border: 1px solid #45475a;
@@ -38,7 +38,6 @@
 
 .control-center-content {
   background-color: transparent;
-  color: #cdd6f4;
 }
 
 .popup-overlay-window {
