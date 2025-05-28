@@ -13,9 +13,9 @@ import { QuickTogglesSection } from '../ControlCenter/QuickTogglesSection';
 import { VolumeSection } from '../ControlCenter/VolumeSection';
 import { BrightnessSection } from '../ControlCenter/BrightnessSection';
 import { SystemActionsSection } from '../ControlCenter/SystemActionsSection';
-import { PowerProfilesSection } from '../ControlCenter/PowerProfilesSection'; 
-import { NetworkSection } from '../ControlCenter/NetworkSection'; 
-import { NightLightToggle } from '../ControlCenter/NightLightToggle'; 
+import { PowerProfilesSection } from '../ControlCenter/PowerProfilesSection';
+import { NetworkSection } from '../ControlCenter/NetworkSection';
+import { NightLightToggle } from '../ControlCenter/NightLightToggle';
 
 // Importy wskaźników i serwisów, które były tu wcześniej, a teraz są w sekcjach, zostały usunięte.
 
@@ -104,14 +104,14 @@ export const ControlCenterPopup = () => {
 				className="control-center-content"
 				orientation={Gtk.Orientation.VERTICAL}
 				spacing={10}
-				css="padding: 15px; min-width: 320px; min-height: 400px;" // min-height może wymagać dostosowania
+				css="padding: 15px; min-width: 450px; min-height: 500px;" // min-height może wymagać dostosowania
 			>
 				<NetworkSection />
 				<QuickTogglesSection />
 				<VolumeSection />
 				<BrightnessSection />
 				<NightLightToggle />
-				<PowerProfilesSection /> 
+				<PowerProfilesSection />
 				{/* Tutaj dodasz więcej sekcji w przyszłości, np. NetworkSection, BluetoothSection, VpnSection */}
 
 				{/* Sekcja Akcji Systemowych na samym dole, wypchnięta przez vexpand w jej własnym <box> */}

@@ -366,4 +366,32 @@ separator {
   min-height: 1px;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.cc-toggle-button,
+.night-light-toggle {
+  background-color: #45475a;
+  color: #cdd6f4;
+  padding: 8px 12px;
+  border-radius: 6px;
+  min-height: 40px;
+  transition: background-color 0.2s ease;
+}
+.cc-toggle-button:hover,
+.night-light-toggle:hover {
+  background-color: #585b70;
+}
+.cc-toggle-button > box icon,
+.night-light-toggle > box icon {
+  font-size: 18px;
+}
+.cc-toggle-button > box.active,
+.night-light-toggle > box.active {
+  background-color: #fff700;
+  color: #11111b;
+}
+
+.network-details-separator {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }/*# sourceMappingURL=style.css.map */

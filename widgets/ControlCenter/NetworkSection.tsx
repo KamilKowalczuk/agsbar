@@ -1,9 +1,11 @@
 // widgets/ControlCenter/NetworkSection.tsx
 import { Gtk } from 'astal/gtk3'; // Upewnij się, że Gtk jest tutaj
+import { App } from 'astal/gtk3'; // <--- DODAJ TEN IMPORT
 import { bind, Variable } from 'astal';
 import { execAsync } from 'astal/process';
 import GLib from 'gi://GLib';
 import { interval } from 'astal/time'; // Dodany import
+import { CONTROL_CENTER_POPUP_NAME } from '../../app'; // <--- DODAJ TEN IMPORT (upewnij się, że ścieżka jest poprawna)
 
 // Typy dla informacji o sieci (będziemy je rozwijać)
 interface NetworkState {
@@ -25,17 +27,21 @@ interface WifiAccessPoint {
 }
 
 export const NetworkSection = () => {
+	// --- Tutaj Twoje definicje Variable: networkState, availableWifiAPs, isScanningWifi, detailsRevealed ---
 	const networkState = Variable<NetworkState>({
 		connected: false,
 		type: 'none',
 		icon: 'network-offline-symbolic',
 	});
-
 	const availableWifiAPs = Variable<WifiAccessPoint[]>([]);
 	const isScanningWifi = Variable(false);
 	const detailsRevealed = Variable(false);
 
+	// --- Tutaj Twoje funkcje: updateNetworkState, scanWifiNetworks, toggleNetworking, handleToggleDetails, connectToWifi ---
+	// (Skopiuj je z naszej ostatniej działającej wersji lub tej, którą podałem wcześniej,
+	//  z poprawkami dla nmcli i pobierania IP)
 	const updateNetworkState = async () => {
+		// console.log("NetworkSection: updateNetworkState - START");
 		try {
 			let currentIcon = 'network-offline-symbolic';
 			let currentType: NetworkState['type'] = 'none';
@@ -43,7 +49,6 @@ export const NetworkSection = () => {
 			let currentActiveConnectionName: string | undefined;
 			let currentIpAddress: string | undefined;
 
-			// 1. Sprawdź ogólną łączność
 			const connectivityResult = await execAsync([
 				'nmcli',
 				'-t',
@@ -60,8 +65,6 @@ export const NetworkSection = () => {
 				connectivity === 'portal'
 			) {
 				currentConnected = true;
-				// 2. Znajdź aktywne urządzenia i ich typy (BEZ IP4.ADDRESS na tym etapie)
-				// Użyjemy pól, które nmcli na pewno akceptuje dla `nmcli device`
 				const devicesOutput = await execAsync([
 					'nmcli',
 					'-t',
@@ -70,7 +73,6 @@ export const NetworkSection = () => {
 					'device',
 				]);
 				const lines = devicesOutput.trim().split('\n');
-
 				let activeDeviceLine: string | undefined;
 				activeDeviceLine = lines.find((line) => {
 					const parts = line.split(':');
@@ -93,13 +95,10 @@ export const NetworkSection = () => {
 
 				if (activeDeviceLine) {
 					const parts = activeDeviceLine.split(':');
-					const deviceName = parts[0]; // Nazwa interfejsu np. enp3s0, wlan0
+					const deviceName = parts[0];
 					const deviceType = parts[1].toLowerCase();
-					currentActiveConnectionName = parts[3] || 'Połączono'; // Nazwa profilu połączenia
-					// const conPath = parts[4]; // Ścieżka D-Bus do aktywnego połączenia
+					currentActiveConnectionName = parts[3] || 'Połączono';
 
-					// 3. Pobierz szczegóły dla aktywnego urządzenia, w tym IP
-					// `nmcli dev show <deviceName>` dostarczy więcej szczegółów
 					try {
 						const devShowOutput = await execAsync([
 							'nmcli',
@@ -163,10 +162,7 @@ export const NetworkSection = () => {
 							}
 						} catch (e) {
 							currentIcon = 'network-wireless-symbolic';
-							console.warn(
-								'NetworkSection: Error getting WiFi signal strength',
-								e
-							);
+							// console.warn("NetworkSection: Error getting WiFi signal strength", e);
 						}
 					} else {
 						currentType = 'unknown';
@@ -182,20 +178,32 @@ export const NetworkSection = () => {
 				currentIcon = 'network-offline-symbolic';
 			}
 
-			networkState.set({
+			const newState = {
 				connected: currentConnected,
 				type: currentType,
 				icon: currentIcon,
 				activeConnectionName: currentActiveConnectionName,
 				ipAddress: currentIpAddress,
-			});
+			};
+			if (JSON.stringify(networkState.get()) !== JSON.stringify(newState)) {
+				networkState.set(newState);
+			}
 		} catch (error) {
-			console.error('NetworkSection: Błąd aktualizacji stanu sieci:', error);
-			networkState.set({
-				connected: false,
-				type: 'none',
-				icon: 'network-error-symbolic',
-			});
+			// console.error("NetworkSection: Błąd aktualizacji stanu sieci:", error);
+			if (
+				JSON.stringify(networkState.get()) !==
+				JSON.stringify({
+					connected: false,
+					type: 'none',
+					icon: 'network-error-symbolic',
+				})
+			) {
+				networkState.set({
+					connected: false,
+					type: 'none',
+					icon: 'network-error-symbolic',
+				});
+			}
 		}
 	};
 
@@ -203,7 +211,7 @@ export const NetworkSection = () => {
 		if (isScanningWifi.get()) return;
 		isScanningWifi.set(true);
 		availableWifiAPs.set([]);
-		console.log('NetworkSection: Rozpoczynanie skanowania sieci Wi-Fi...');
+		// console.log("NetworkSection: Rozpoczynanie skanowania sieci Wi-Fi...");
 		try {
 			const output = await execAsync([
 				'nmcli',
@@ -217,7 +225,7 @@ export const NetworkSection = () => {
 			const lines = output.trim().split('\n');
 			const aps: WifiAccessPoint[] = lines
 				.map((line) => {
-					const parts = line.split(':');
+					const parts = line.split(':', 7); // Limit split to avoid issues with SSID containing ':'
 					return {
 						ssid: parts[0] || 'Ukryta sieć',
 						bssid: parts[1],
@@ -230,9 +238,9 @@ export const NetworkSection = () => {
 				})
 				.sort((a, b) => b.signal - a.signal);
 			availableWifiAPs.set(aps);
-			console.log(`NetworkSection: Znaleziono ${aps.length} sieci Wi-Fi.`);
+			// console.log(`NetworkSection: Znaleziono ${aps.length} sieci Wi-Fi.`);
 		} catch (error) {
-			console.error('NetworkSection: Błąd skanowania sieci Wi-Fi:', error);
+			// console.error("NetworkSection: Błąd skanowania sieci Wi-Fi:", error);
 			availableWifiAPs.set([]);
 		} finally {
 			isScanningWifi.set(false);
@@ -240,10 +248,17 @@ export const NetworkSection = () => {
 	};
 
 	GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
-		updateNetworkState();
+		updateNetworkState().catch((err) =>
+			console.error('NW_SECTION_DEBUG: Initial updateNetworkState failed:', err)
+		);
 		return GLib.SOURCE_REMOVE;
 	});
-	const networkPollInterval = interval(5000, updateNetworkState);
+	const networkPollInterval = interval(5000, () => {
+		// Zapisz referencję do interwału
+		updateNetworkState().catch((err) =>
+			console.error('NW_SECTION_DEBUG: Polled updateNetworkState failed:', err)
+		);
+	});
 
 	const toggleNetworking = async () => {
 		try {
@@ -288,12 +303,14 @@ export const NetworkSection = () => {
 		}
 	};
 
+	// --- Pełny RETURN dla NetworkSection ---
 	return (
 		<box
 			className="cc-section network-section"
 			orientation={Gtk.Orientation.VERTICAL}
 			spacing={8}
 		>
+			{/* Główny wiersz z przełącznikiem i przyciskiem rozwijania */}
 			<box
 				orientation={Gtk.Orientation.HORIZONTAL}
 				spacing={10}
@@ -338,10 +355,48 @@ export const NetworkSection = () => {
 				</button>
 			</box>
 
+			{/* Sekcja szczegółów (rozwijana) */}
 			<revealer
 				reveal_child={bind(detailsRevealed)}
 				transition_type={Gtk.RevealerTransitionType.SLIDE_DOWN}
 				transition_duration={250}
+				valign={Gtk.Align.START} // Ważne dla kontroli wysokości
+				setup={(self: Gtk.Revealer) => {
+					let notifyChildRevealedHandlerId = 0;
+					notifyChildRevealedHandlerId = self.connect(
+						'notify::child-revealed',
+						() => {
+							// Ten sygnał jest emitowany, gdy właściwość child-revealed się zmienia.
+							// Animacja może jeszcze trwać lub właśnie się zakończyła.
+							const isRevealed = self.get_child_revealed();
+							console.log(
+								`Revealer: child-revealed state changed to: ${isRevealed}. Transition duration: ${self.transition_duration}`
+							);
+
+							// Wymuś przerysowanie CCP po ZAKOŃCZENIU animacji.
+							// Czas opóźnienia powinien być równy lub nieco większy niż self.transition_duration.
+							GLib.timeout_add(
+								GLib.PRIORITY_DEFAULT_IDLE,
+								self.transition_duration + 50,
+								() => {
+									// np. 250ms + 50ms
+									const ccWindow = App.get_window(CONTROL_CENTER_POPUP_NAME);
+									if (ccWindow && ccWindow.visible) {
+										console.log(
+											'Forcing CCP queue_resize after revealer animation completed.'
+										);
+										ccWindow.queue_resize();
+									}
+									return GLib.SOURCE_REMOVE;
+								}
+							);
+						}
+					);
+					self.connect('destroy', () => {
+						if (notifyChildRevealedHandlerId !== 0)
+							self.disconnect(notifyChildRevealedHandlerId);
+					});
+				}}
 				child={
 					<box
 						className="network-details-content"
@@ -363,7 +418,7 @@ export const NetworkSection = () => {
 									<box orientation={Gtk.Orientation.VERTICAL} spacing={5}>
 										<label
 											halign={Gtk.Align.START}
-											use_markup={true} // Pango markup
+											use_markup={true}
 											label={`<b>Połączenie przewodowe:</b> ${
 												state.activeConnectionName || 'Aktywne'
 											}`}
@@ -371,7 +426,6 @@ export const NetworkSection = () => {
 										{state.ipAddress && (
 											<label
 												halign={Gtk.Align.START}
-												use_markup={true}
 												label={`Adres IP: ${state.ipAddress}`}
 											/>
 										)}
@@ -383,7 +437,7 @@ export const NetworkSection = () => {
 									<box orientation={Gtk.Orientation.VERTICAL} spacing={5}>
 										<label
 											halign={Gtk.Align.START}
-											use_markup={true} // Pango markup
+											use_markup={true}
 											label={`<b>Połączono z Wi-Fi:</b> ${
 												state.activeConnectionName || 'Brak nazwy'
 											}`}
@@ -391,11 +445,13 @@ export const NetworkSection = () => {
 										{state.ipAddress && (
 											<label
 												halign={Gtk.Align.START}
-												use_markup={true}
 												label={`Adres IP: ${state.ipAddress}`}
 											/>
 										)}
-										<Gtk.Separator orientation={Gtk.Orientation.HORIZONTAL} />
+										{/* Użyj Gtk.Separator bezpośrednio */}
+										<box className="network-details-separator">
+											<Gtk.Separator orientation={Gtk.Orientation.HORIZONTAL} />
+										</box>
 										<box
 											orientation={Gtk.Orientation.HORIZONTAL}
 											spacing={5}
@@ -419,15 +475,17 @@ export const NetworkSection = () => {
 												/>
 											</button>
 										</box>
+
 										<scrollable
 											height_request={150}
 											hscrollbar_policy={Gtk.PolicyType.NEVER}
 											vscrollbar_policy={Gtk.PolicyType.AUTOMATIC}
+											// css="min-width: 330px;" // Możesz to dodać, jeśli potrzebne
 											child={
 												<box
 													orientation={Gtk.Orientation.VERTICAL}
 													spacing={3}
-													margin_right={5}
+													className="wifi-ap-list-container-box" // Użyj klasy do stylizacji marginesu prawego w CSS
 												>
 													{bind(availableWifiAPs).as((aps) =>
 														aps.length > 0 ? (
@@ -444,7 +502,7 @@ export const NetworkSection = () => {
 																>
 																	<box
 																		orientation={Gtk.Orientation.HORIZONTAL}
-																		spacing={8}
+																		spacing={6}
 																		hexpand={true}
 																		halign={Gtk.Align.FILL}
 																	>
@@ -465,6 +523,8 @@ export const NetworkSection = () => {
 																			label={ap.ssid}
 																			hexpand={true}
 																			halign={Gtk.Align.START}
+																			truncate="end"
+																			maxWidthChars={18} // Dostosuj w razie potrzeby
 																		/>
 																		{ap.secure && (
 																			<icon icon="network-wireless-encrypted-symbolic" />
@@ -480,7 +540,7 @@ export const NetworkSection = () => {
 															))
 														) : (
 															<label
-																label="Brak dostępnych sieci Wi-Fi lub trwa skanowanie..."
+																label="Skanowanie lub brak sieci..."
 																css="font-style: italic;"
 															/>
 														)
@@ -491,9 +551,10 @@ export const NetworkSection = () => {
 									</box>
 								);
 							}
+							// Fallback, jeśli stan jest nieoczekiwany
 							return (
 								<label
-									label={`Stan sieci: ${state.type}`}
+									label={`Nieznany stan sieci: ${state.type}`}
 									css="font-style: italic;"
 								/>
 							);

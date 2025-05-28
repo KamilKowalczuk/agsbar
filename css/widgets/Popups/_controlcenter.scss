@@ -102,12 +102,12 @@
 	}
 }
 //.power-profiles-section {
-	// Możesz dodać specyficzne marginesy/paddingi dla tej sekcji, jeśli potrzebne
-	// np. margin-top: 5px;
+// Możesz dodać specyficzne marginesy/paddingi dla tej sekcji, jeśli potrzebne
+// np. margin-top: 5px;
 //}
 
 //.power-profiles-buttons {
-	// Styl dla kontenera przycisków, jeśli potrzebny
+// Styl dla kontenera przycisków, jeśli potrzebny
 //}
 
 .power-profile-button {
@@ -124,7 +124,7 @@
 	}
 
 	//icon {
-		// Rozmiar ikony już ustawiony w JSX, można tu dodać kolor, jeśli potrzebny
+	// Rozmiar ikony już ustawiony w JSX, można tu dodać kolor, jeśli potrzebny
 	//}
 
 	label {
@@ -144,8 +144,8 @@
 		font-weight: bold;
 
 		//icon {
-			// Możesz zmienić kolor ikony na aktywnym przycisku, jeśli standardowy nie pasuje
-			// color: variables.$base;
+		// Możesz zmienić kolor ikony na aktywnym przycisku, jeśli standardowy nie pasuje
+		// color: variables.$base;
 		//}
 		label {
 			// Ogólny styl dla etykiety wewnątrz przycisku
@@ -159,8 +159,8 @@
 			font-weight: bold;
 
 			//icon {
-				// Jeśli chcesz specyficzny kolor dla ikony w aktywnym przycisku:
-				// color: variables.$crust; // Lub inny kontrastujący kolor, np. $base lub $mantle z Catppuccin
+			// Jeśli chcesz specyficzny kolor dla ikony w aktywnym przycisku:
+			// color: variables.$crust; // Lub inny kontrastujący kolor, np. $base lub $mantle z Catppuccin
 			//}
 			label {
 				color: variables.$crust; // Ustawia kolor etykiety na taki sam jak ogólny `color` dla `.active`
@@ -173,140 +173,150 @@
 }
 
 //.network-section {
-    // Ogólne style dla całej sekcji sieci, jeśli potrzebne
-    // np. border-top: 1px solid variables.$surface2; padding-top: 10px;
+// Ogólne style dla całej sekcji sieci, jeśli potrzebne
+// np. border-top: 1px solid variables.$surface2; padding-top: 10px;
 //}
 
 .network-main-toggle {
-    background-color: variables.$surface1;
-    color: variables.$text;
-    padding: 8px 12px; // Większy padding
-    border-radius: variables.$border-radius-standard;
-    min-height: 40px; // Ustawienie minimalnej wysokości
+	background-color: variables.$surface1;
+	color: variables.$text;
+	padding: 8px 12px; // Większy padding
+	border-radius: variables.$border-radius-standard;
+	min-height: 40px; // Ustawienie minimalnej wysokości
 
-    &:hover {
-        background-color: variables.$surface2;
-    }
+	&:hover {
+		background-color: variables.$surface2;
+	}
 
-    // Styl dla wewnętrznego boxa, aby etykieta się rozciągała
-    > box {
-        icon {
-            font-size: 18px; // Dostosuj rozmiar ikony
-        }
-        label {
-            font-size: 1em; // Normalny rozmiar czcionki dla nazwy sieci
-            // text-align: left; // Domyślnie, ale upewnij się
-        }
-    }
+	// Styl dla wewnętrznego boxa, aby etykieta się rozciągała
+	> box {
+		icon {
+			font-size: 18px; // Dostosuj rozmiar ikony
+		}
+		label {
+			font-size: 1em; // Normalny rozmiar czcionki dla nazwy sieci
+			// text-align: left; // Domyślnie, ale upewnij się
+		}
+	}
 }
 
 .network-details-toggle {
-    background-color: variables.$surface1;
-    color: variables.$text;
-    padding: 8px;
-    border-radius: variables.$border-radius-standard;
-    min-height: 40px;
-    min-width: 40px;
+	background-color: variables.$surface1;
+	color: variables.$text;
+	padding: 8px;
+	border-radius: variables.$border-radius-standard;
+	min-height: 40px;
+	min-width: 40px;
 
-    &:hover {
-        background-color: variables.$surface2;
-    }
-    icon {
-        font-size: 16px;
-    }
+	&:hover {
+		background-color: variables.$surface2;
+	}
+	icon {
+		font-size: 16px;
+	}
 }
 
 .network-details-content {
-    background-color: rgba(variables.$surface0, 0.7); // Lekko przezroczyste tło dla szczegółów
-    padding: 10px;
-    border-radius: variables.$border-radius-standard;
-    border: 1px solid variables.$surface1;
+	background-color: rgba(
+		variables.$surface0,
+		0.7
+	); // Lekko przezroczyste tło dla szczegółów
+	padding: 10px;
+	border-radius: variables.$border-radius-standard;
+	border: 1px solid variables.$surface1;
 
-    //label {
-        // Ogólne style dla etykiet w szczegółach
-    //}
-    b { // Dla pogrubionego tekstu w etykietach
-        color: variables.$blue; // Lub inny kolor akcentu
-    }
+	//label {
+	// Ogólne style dla etykiet w szczegółach
+	//}
+	b {
+		// Dla pogrubionego tekstu w etykietach
+		color: variables.$blue; // Lub inny kolor akcentu
+	}
 }
 
 .wifi-ap-button {
-    padding: 6px 8px;
-    border-radius: variables.$border-radius-standard - 2px;
-    background-color: transparent;
-    transition: background-color 0.15s ease;
+	padding: 6px 8px;
+	border-radius: variables.$border-radius-standard - 2px;
+	background-color: transparent;
+	transition: background-color 0.15s ease;
 
-    &:hover {
-        background-color: variables.$surface1;
-    }
+	&:hover {
+		background-color: variables.$surface1;
+	}
 
-    &.active {
-        background-color: variables.$blue;
-        color: variables.$crust; // Lub inny kontrastujący kolor dla tekstu
-        font-weight: bold;
-        icon { // Ikona w aktywnym przycisku
-             color: variables.$crust; // Lub inny kontrastujący
-        }
-    }
+	&.active {
+		background-color: variables.$blue;
+		color: variables.$crust; // Lub inny kontrastujący kolor dla tekstu
+		font-weight: bold;
+		icon {
+			// Ikona w aktywnym przycisku
+			color: variables.$crust; // Lub inny kontrastujący
+		}
+	}
 
-    > box { // Wewnętrzny box w przycisku sieci Wi-Fi
-        icon {
-            font-size: 16px;
-            // Kolor ikon sygnału można by też dynamicznie zmieniać, ale to później
-        }
-        label {
-            font-size: 0.9em;
-        }
-        // Ikona kłódki lub "połączono"
-        icon:last-child { 
-            font-size: 14px;
-            // color: variables.$overlay1; // Mniej ważna ikona
-        }
-    }
+	> box {
+		// Wewnętrzny box w przycisku sieci Wi-Fi
+		icon {
+			font-size: 16px;
+			// Kolor ikon sygnału można by też dynamicznie zmieniać, ale to później
+		}
+		label {
+			font-size: 0.9em;
+		}
+		// Ikona kłódki lub "połączono"
+		icon:last-child {
+			font-size: 14px;
+			// color: variables.$overlay1; // Mniej ważna ikona
+		}
+	}
 }
 
 // Dla separatora, jeśli go używasz
 separator {
-    background-color: variables.$surface2;
-    min-height: 1px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+	background-color: variables.$surface2;
+	min-height: 1px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 // W css/widgets/Popups/_controlcenter.scss
 
 // ... (istniejące style)
 
-.cc-toggle-button, // Ogólna klasa dla przycisków przełączających w CC
-.night-light-toggle { // Specyficzna klasa, jeśli potrzebujesz
-    background-color: variables.$surface1;
-    color: variables.$text;
-    padding: 8px 12px;
-    border-radius: variables.$border-radius-standard;
-    min-height: 40px;
-    transition: background-color 0.2s ease;
+.cc-toggle-button,
+.night-light-toggle {
+	background-color: variables.$surface1;
+	color: variables.$text;
+	padding: 8px 12px;
+	border-radius: variables.$border-radius-standard;
+	min-height: 40px;
+	transition: background-color 0.2s ease;
+	&:hover {
+		background-color: variables.$surface2;
+	}
+	> box {
+		// SELEKTOR DZIECKA BEZPOŚREDNIEGO
+		icon {
+			font-size: 18px;
+		}
+		// label:first-of-type {
+		// 	// Na razie zakomentuj etykiety
+		// 	font-size: 0.95em;
+		// }
+		// label:last-of-type {
+		// 	color: variables.$subtext0;
+		// }
+		&.active {
+			background-color: variables.$yellow;
+			color: variables.$crust;
+		}
+	}
+}
 
-    &:hover {
-        background-color: variables.$surface2;
-    }
-
-    // Styl dla wewnętrznego boxa
-    > box {
-        icon {
-            font-size: 18px; // Dostosuj rozmiar ikony
-        }
-        label:first-of-type { // Etykieta główna
-            font-size: 0.95em;
-        }
-        label:last-of-type { // Etykieta WŁ/WYŁ
-            color: variables.$subtext0; // Mniej ważny kolor
-        }
-    }
-
-    // Możesz dodać specyficzne style dla stanu aktywnego, jeśli chcesz go bardziej wyróżnić
-    // np. jeśli isNightLightActive ma dodawać klasę '.active' do przycisku
-    // &.active {
-    //     background-color: variables.$yellow; // Np. żółty dla filtra
-    //     color: variables.$crust;
-    // }
+.network-details-separator {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	// Możesz też dodać:
+	// min-height: 1px;
+	// background-color: variables.$surface2; // Lub inny kolor linii
 }
