@@ -290,4 +290,80 @@
 }
 .power-profile-button.active.active label {
   color: #11111b;
+}
+
+.network-main-toggle {
+  background-color: #45475a;
+  color: #cdd6f4;
+  padding: 8px 12px;
+  border-radius: 6px;
+  min-height: 40px;
+}
+.network-main-toggle:hover {
+  background-color: #585b70;
+}
+.network-main-toggle > box icon {
+  font-size: 18px;
+}
+.network-main-toggle > box label {
+  font-size: 1em;
+}
+
+.network-details-toggle {
+  background-color: #45475a;
+  color: #cdd6f4;
+  padding: 8px;
+  border-radius: 6px;
+  min-height: 40px;
+  min-width: 40px;
+}
+.network-details-toggle:hover {
+  background-color: #585b70;
+}
+.network-details-toggle icon {
+  font-size: 16px;
+}
+
+.network-details-content {
+  background-color: rgba(49, 50, 68, 0.7);
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #45475a;
+}
+.network-details-content b {
+  color: #89b4fa;
+}
+
+.wifi-ap-button {
+  padding: 6px 8px;
+  border-radius: 4px;
+  background-color: transparent;
+  transition: background-color 0.15s ease;
+}
+.wifi-ap-button:hover {
+  background-color: #45475a;
+}
+.wifi-ap-button.active {
+  background-color: #89b4fa;
+  color: #11111b;
+  font-weight: bold;
+}
+.wifi-ap-button.active icon {
+  color: #11111b;
+}
+.wifi-ap-button > box icon {
+  font-size: 16px;
+}
+.wifi-ap-button > box label {
+  font-size: 0.9em;
+}
+.wifi-ap-button > box icon:last-child {
+  font-size: 14px;
+}
+
+separator {
+  background-color: #585b70;
+  min-height: 1px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }/*# sourceMappingURL=style.css.map */

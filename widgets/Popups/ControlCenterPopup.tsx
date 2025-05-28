@@ -13,7 +13,10 @@ import { QuickTogglesSection } from '../ControlCenter/QuickTogglesSection';
 import { VolumeSection } from '../ControlCenter/VolumeSection';
 import { BrightnessSection } from '../ControlCenter/BrightnessSection';
 import { SystemActionsSection } from '../ControlCenter/SystemActionsSection';
-import { PowerProfilesSection } from '../ControlCenter/PowerProfilesSection'; // NOWY IMPORT
+import { PowerProfilesSection } from '../ControlCenter/PowerProfilesSection'; 
+import { NetworkSection } from '../ControlCenter/NetworkSection'; 
+import { NightLightToggle } from '../ControlCenter/NightLightToggle'; 
+
 // Importy wskaźników i serwisów, które były tu wcześniej, a teraz są w sekcjach, zostały usunięte.
 
 const GdkRuntime = imports.gi.Gdk;
@@ -103,9 +106,11 @@ export const ControlCenterPopup = () => {
 				spacing={10}
 				css="padding: 15px; min-width: 320px; min-height: 400px;" // min-height może wymagać dostosowania
 			>
+				<NetworkSection />
 				<QuickTogglesSection />
 				<VolumeSection />
 				<BrightnessSection />
+				<NightLightToggle />
 				<PowerProfilesSection /> 
 				{/* Tutaj dodasz więcej sekcji w przyszłości, np. NetworkSection, BluetoothSection, VpnSection */}
 
